@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.shiyf</groupId>
-    <artifactId>serurity</artifactId>
+    <artifactId>security</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>serurity</name>
+    <name>project-base</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

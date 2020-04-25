@@ -63,11 +63,10 @@ public class JWTUtils {
      * 验证token是否还有效
      *
      * @param token       客户端传入的token
-     * @param userDetails 从数据库中查询出来的用户信息
      */
-    public boolean validateToken(String token, UserDetails userDetails) {
+    public boolean validateToken(String token ) {
         String username = getUserNameFromToken(token);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+        return !isTokenExpired(token);
     }
 
     /**

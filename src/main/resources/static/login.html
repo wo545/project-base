@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <input type="text" name="username" id="username" placeholder="用户名">
+    <input type="password" name="password" id="password" placeholder="密码">
+    <input type="button" onclick="login()">
+</body>
+<script>
+
+    function login(){
+        var name = $('#username').val();
+        var password = $('#password').val();
+        $.ajax({
+            type: 'post',
+            url: "/login",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({"username": name, "password": password}),
+            success: function (res) {
+                if (res.code === 200) {
+                    localStorage.setItem("token", res.data);
+                    console.log("登录成功，跳转到回调地址",res.data);
+                    window.location.href = getUrlParam("redirect") + "?token=" + res.data;
+                } else {
+                    alert("账号密码错误");
+                }
+            }
+        })
+    }
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+</script>
+</html>

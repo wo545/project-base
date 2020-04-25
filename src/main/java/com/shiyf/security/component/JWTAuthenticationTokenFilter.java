@@ -48,7 +48,7 @@ public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 //从数据库中直接获取用户信息，然后和token中的用户信息去比较
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-                if (jwtUtils.validateToken(authToken, userDetails)) {
+                if (jwtUtils.validateToken(authToken)) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     LOGGER.info("authenticated user:{}", username);
